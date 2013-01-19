@@ -5,6 +5,7 @@
 
 pub/
 .DS_Store
+.*.swp
 *~
 ._*
 .\#*
