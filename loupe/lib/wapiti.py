@@ -87,8 +87,6 @@ class CachedWapiti(object):
                     raise
         return
 
-
-
 '''
 def get_category(cat_name, count=PER_CALL_LIMIT, to_zero_ns=False, namespaces=None, cont_str=""):
 def flatten_category(cat_name, page_limit=DEFAULT_MAX_COUNT, depth_first=True, *a, **kw):
