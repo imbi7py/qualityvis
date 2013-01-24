@@ -52,7 +52,7 @@ class CachedWapiti(object):
         self._init_dir(self.root_path)
 
     def __getattr__(self, name):
-        cached = ['get_category', 
+        cached = ['get_category',
                   'flatten_category',
                   'get_category_recursive',
                   'get_transcluded',
@@ -86,7 +86,7 @@ class CachedWapiti(object):
                 if not os.path.isdir(path_to_create):
                     raise
         return
-        
+
 
 
 '''

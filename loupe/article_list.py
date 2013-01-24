@@ -24,7 +24,7 @@ ArticleIdentifier = namedtuple('ArticleIdentifier', 'name source')
 class ArticleListManager(object):
     def __init__(self, search_path=None):
         if search_path is None:
-            default_path = os.getenv('ARTICLE_LIST_HOME') or os.getcwd()
+            default_path = os.getenv('LOUPE_LIST_HOME') or os.getcwd()
             search_path = [default_path]
         self.search_path = search_path
         self._output_path = None

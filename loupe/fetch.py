@@ -28,6 +28,45 @@ DEFAULT_LIMITS = {
     Revisions: 20}
 
 
+class FetchDataManager(object):
+    def __init__(self, search_path=None):
+        if search_path is None:
+            default_path = os.getenv('LOUPE_FETCH_HOME') or os.getcwd()
+            search_path = [default_path]
+        self.search_path = search_path
+        self._output_path = None
+
+    def lookup(self, filename):
+        if not filename:
+            return None
+        for search_dir in self.search_path:
+            if os.path.isdir(search_dir):
+                if os.path.isfile(filename):
+                    return os.path.join(search_dir, filename)
+                elif os.path.isfile(filename + DEFAULT_EXT):
+                    return os.path.join(search_dir, filename + DEFAULT_EXT)
+        if os.path.isfile(filename):
+            return filename
+        return None
+
+    def get_full_list(self):
+        ret = []
+        for search_dir in self.search_path:
+            try:
+                ret.extend([fn for fn in os.listdir(search_dir)
+                            if fn.endswith(DEFAULT_EXT)])
+            except IOError:
+                pass
+        return ret
+
+    @property
+    def output_path(self):
+        if self._output_path:
+            return self._output_path
+        else:
+            return self.search_path[0]
+
+
 def get_filename(prefix=''):
     return prefix.replace(' ', '_') + '-' + str(int(time.time()))
 
